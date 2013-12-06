@@ -1,0 +1,8 @@
+[Unit]
+Description=Socket for podversion
+
+[Socket]
+ListenStream=/run/podversion.sock
+
+[Install]
+WantedBy=sockets.target
