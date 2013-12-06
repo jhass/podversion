@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    title = @title
+    link rel="icon" type="image/png" href="favicon.png"
+    link rel="stylesheet" type="text/css" href="layout.css"
+  body
+    == slim :form
+    == yield
+
+    javascript:
+      var pkBaseURL = (("https:" == document.location.protocol) ? "https://stats.mrzyx.de/" : "http://stats.mrzyx.de/");
+      document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+    javascript:
+      try {
+        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 8);
+        piwikTracker.trackPageView();
+        piwikTracker.enableLinkTracking();
+      } catch( err ) {}
+    noscript
+      p: img src="http://stats.mrzyx.de/piwik.php?idsite=8" style="border:0" alt=""
+

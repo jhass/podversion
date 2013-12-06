@@ -1,0 +1,37 @@
+body {
+  width:70%;
+  margin:auto;
+  text-align:center;
+  font-size:1.5em;
+}
+
+form {
+  margin-top:2%;
+}
+
+fieldset {
+  padding:2em;
+  border:1px dashed;
+}
+
+input {
+  border:1px solid lightgray;
+  height:2em;
+  text-align:center;
+  font-size:1.2em;
+  padding:0.1em;
+  margin:0.1em;
+}
+
+input[type='submit'] {
+  height: 2.2em;
+  padding: 0.1em 0.4em;
+  cursor: pointer;
+}
+input[type='submit']:hover {
+  background-color: green;
+}
+
+label {
+  display:none;
+}

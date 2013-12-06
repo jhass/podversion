@@ -1,0 +1,7 @@
+form action="/version" method="post"
+  fieldset
+    legend On which version runs my diaspora* pod?
+    label[for="domain"] Enter domain:
+    input[type="text" placeholder="diaspora.example.org" name="domain"
+          value="#{@domain}"]
+    input type="submit" value="Let's find out!"
