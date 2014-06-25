@@ -1,4 +1,4 @@
 Podversion
 ==========
 
-Source of http://podversion.tk
+Source of http://version.diaspora.social

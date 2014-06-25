@@ -4,8 +4,8 @@ Description=A webtool to check the version of a Diaspora pod
 [Service]
 User=mrzyx
 WorkingDirectory=/home/mrzyx/podversion
-Environment="GEM_HOME=/home/mrzyx/.gem/ruby/2.0.0"
-ExecStart=/home/mrzyx/.gem/ruby/2.0.0/bin/puma -b unix:///run/podversion.sock
+Environment="GEM_HOME=/home/mrzyx/.gem/ruby/2.1.0"
+ExecStart=/home/mrzyx/.gem/ruby/2.1.0/bin/puma -b unix:///run/podversion.sock
 CPUAccounting=true
 MemoryAccounting=true
 BlockIOAccounting=true

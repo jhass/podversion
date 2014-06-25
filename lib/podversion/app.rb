@@ -5,7 +5,7 @@ class Podversion::App < Sinatra::Base
   set :public_folder, File.expand_path("../../../public", __FILE__)
 
   get '/' do
-    @title = "Podversion.tk"
+    @title = "Podversion"
     slim :index
   end
 
@@ -23,7 +23,7 @@ class Podversion::App < Sinatra::Base
 
   get '/:domain' do |domain|
     version = Podversion.new(domain)
-    @title = "Version of #{version.domain} - Podversion.tk"
+    @title = "Version of #{version.domain} - Podversion"
     @domain = version.domain
     @message = version.human_message
 
