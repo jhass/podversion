@@ -7,7 +7,7 @@ class Podversion
   VERSION_HEADER = 'x-diaspora-version'
   UPDATE_HEADER = 'x-git-update'
   REVISION_HEADER = 'x-git-revision'
-  COMMIT_URL_TEMPLATE = 'https://github.com/diaspora/diaspora/:revision'
+  COMMIT_URL_TEMPLATE = 'https://github.com/diaspora/diaspora/commit/:revision'
   TIME_FORMAT = '%Y/%m/%d %H:%M %Z'
   TIMEOUT = 5
 
