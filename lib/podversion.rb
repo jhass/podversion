@@ -28,7 +28,7 @@ class Podversion
   end
 
   def success?
-    @success
+    @state == :success
   end
 
   def commit_url
@@ -40,6 +40,7 @@ class Podversion
   end
 
   def human_message plain_text=false
+    return "Sorry, #{domain}'s SSL setup looks invalid." if @state == :bad_ssl
     return "Sorry, I couldn't connect to #{domain}." unless success?
 
     unless version || revision || update
@@ -65,11 +66,16 @@ class Podversion
   def check
     response = fetch || fetch('http')
 
-    if response.nil? || !response.success?
-      @success = false
-      return
+    case response
+    when nil
+      @state = :failed
+    when Symbol
+      @state = response
+    when :success?.to_proc
+      @state = :success
     end
 
+    return unless success?
 
     @domain = response.env[:url].host
     @status = response.status
@@ -77,8 +83,6 @@ class Podversion
     parse_version response[VERSION_HEADER]
     parse_update response[UPDATE_HEADER]
     parse_revision response[REVISION_HEADER]
-
-    @success = true
   end
 
   def fetch scheme='https', url= nil, redirect_limit=5
@@ -90,6 +94,9 @@ class Podversion
 
     response
   rescue Faraday::Error::ConnectionFailed, Errno::ETIMEDOUT, Faraday::Error::TimeoutError
+    :cannot_connect
+  rescue Faraday::SSLError
+    :bad_ssl
   end
 
   def parse_version version
