@@ -87,7 +87,7 @@ class Podversion
 
   def fetch scheme='https', url= nil, redirect_limit=5
     url ||= normalize_to_url(@domain, scheme)
-    response = Faraday.head url
+    response = Faraday.get url
     if [301, 302].include?(response.status) && redirect_limit > 0
       return fetch scheme, response['location'], redirect_limit-1
     end
