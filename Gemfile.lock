@@ -4,9 +4,8 @@ GEM
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     multipart-post (2.0.0)
-    puma (2.11.3)
-      rack (>= 1.1, < 2.0)
-    rack (1.6.2)
+    puma (2.12.3)
+    rack (1.6.4)
     rack-protection (1.5.3)
       rack
     sinatra (1.4.6)
@@ -30,4 +29,4 @@ DEPENDENCIES
   tilt (< 2)
 
 BUNDLED WITH
-   1.10.4
+   1.10.6
