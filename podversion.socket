@@ -2,7 +2,7 @@
 Description=Socket for podversion
 
 [Socket]
-ListenStream=/run/podversion.sock
+ListenStream=[::]:3080
 
 [Install]
 WantedBy=sockets.target

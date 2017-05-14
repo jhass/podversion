@@ -2,8 +2,8 @@
 Description=A webtool to check the version of a Diaspora pod
 
 [Service]
-User=jhass
-WorkingDirectory=/home/jhass/podversion
+User=podversion
+WorkingDirectory=/home/podversion/podversion
 Environment="RACK_ENV=production"
 ExecStart=/usr/bin/bundle exec --keep-file-descriptors puma -b unix:///run/podversion.sock
 CPUAccounting=true
