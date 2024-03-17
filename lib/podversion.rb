@@ -1,25 +1,25 @@
-require 'time'
-require 'uri'
-require 'faraday'
+require "time"
+require "uri"
+require "faraday"
 
 class Podversion
-  PATH = '/users/sign_in'
-  VERSION_HEADER = 'x-diaspora-version'
-  UPDATE_HEADER = 'x-git-update'
-  REVISION_HEADER = 'x-git-revision'
-  COMMIT_URL_TEMPLATE = 'https://github.com/diaspora/diaspora/commit/:revision'
-  TIME_FORMAT = '%Y/%m/%d %H:%M %Z'
+  PATH = "/users/sign_in"
+  VERSION_HEADER = "x-diaspora-version"
+  UPDATE_HEADER = "x-git-update"
+  REVISION_HEADER = "x-git-revision"
+  COMMIT_URL_TEMPLATE = "https://github.com/diaspora/diaspora/commit/:revision"
+  TIME_FORMAT = "%Y/%m/%d %H:%M %Z"
   TIMEOUT = 5
 
   Faraday.default_connection.options[:timeout] = TIMEOUT
 
   def self.normalize_to_domain input
-    input = "http://#{input}" unless input.start_with? 'http'
+    input = "http://#{input}" unless input.start_with? "http"
     URI.parse(input).host
   end
 
   attr_reader :domain, :status, :full_version, :version, :patchlevel,
-              :update, :revision
+    :update, :revision
 
   def initialize domain
     @domain = self.class.normalize_to_domain domain
@@ -32,14 +32,14 @@ class Podversion
   end
 
   def commit_url
-    COMMIT_URL_TEMPLATE.sub(':revision', revision)
+    COMMIT_URL_TEMPLATE.sub(":revision", revision)
   end
 
   def commit_link_tag
     "<a href='#{commit_url}'>#{commit_url}</a>"
   end
 
-  def human_message plain_text=false
+  def human_message plain_text = false
     return "Sorry, #{domain}'s SSL setup looks invalid." if @state == :bad_ssl
     return "Sorry, I couldn't connect to #{domain}." unless success?
 
@@ -58,13 +58,13 @@ class Podversion
       message << "The last update was around #{update.strftime(TIME_FORMAT)}."
     end
 
-    message.join(' ')
+    message.join(" ")
   end
 
   private
 
   def check
-    response = fetch || fetch('http')
+    response = fetch || fetch("http")
 
     case response
     when nil
@@ -85,11 +85,11 @@ class Podversion
     parse_revision response[REVISION_HEADER]
   end
 
-  def fetch scheme='https', url= nil, redirect_limit=5
+  def fetch scheme = "https", url = nil, redirect_limit = 5
     url ||= normalize_to_url(@domain, scheme)
     response = Faraday.get url
     if [301, 302].include?(response.status) && redirect_limit > 0
-      return fetch scheme, response['location'], redirect_limit-1
+      return fetch scheme, response["location"], redirect_limit - 1
     end
 
     response
@@ -101,7 +101,7 @@ class Podversion
 
   def parse_version version
     @full_version = version
-    @version, @patchlevel = @full_version.split '-p' if @full_version
+    @version, @patchlevel = @full_version.split "-p" if @full_version
   end
 
   def parse_update update
@@ -115,7 +115,7 @@ class Podversion
     end
   end
 
-  def normalize_to_url input, scheme='https'
+  def normalize_to_url input, scheme = "https"
     input = "http://#{input}" unless input.start_with? scheme
     uri = URI.parse(input)
     uri.scheme = scheme
