@@ -93,7 +93,7 @@ class Podversion
     end
 
     response
-  rescue Faraday::Error::ConnectionFailed, Errno::ETIMEDOUT, Faraday::Error::TimeoutError
+  rescue Faraday::ConnectionFailed, Errno::ETIMEDOUT, Faraday::TimeoutError
     :cannot_connect
   rescue Faraday::SSLError
     :bad_ssl

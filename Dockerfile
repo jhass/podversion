@@ -1,4 +1,4 @@
-FROM ruby:3.3.0
+FROM ruby:3.4.4
 COPY . /app
 WORKDIR /app
 RUN bundle config set --local deployment true; \
